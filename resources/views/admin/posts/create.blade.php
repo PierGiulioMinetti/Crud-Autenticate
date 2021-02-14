@@ -28,6 +28,11 @@
             <label for="body">Post content</label>
             <textarea class="form-control" name="body" id="body" > {{old('body')}} </textarea>
         </div>
+        {{-- <div class="form-group">
+            <label for="path_img">Post image</label>
+            <input class="form-
+            control" type="file" name="path_img" id="path_img" accept="image/*" >
+        </div> --}}
         
         <input class="btn btn-primary" type="submit" value="Create Post">
     </form>

@@ -6,9 +6,10 @@
         {{$post->title}}
     </h1>
         <article class="mb-5">
-            <h2>
-                {{$post->title}}
-            </h2>
+            
+            <p>
+                {{$post->body}}
+            </p>
                 <div class="info">
                     By {{$post->user->name}}
                     <div class="date">

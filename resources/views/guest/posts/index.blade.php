@@ -5,6 +5,13 @@
     <h1>
         Blog 
     </h1>
+
+    @if (session('post-deleted'))
+        <div class="alert alert-danger">
+           Post "{{session('post-deleted')}}" has been deleted
+        </div>
+    @endif
+
     @if ($posts->isEmpty())
         <p>
             No post has been created yet.

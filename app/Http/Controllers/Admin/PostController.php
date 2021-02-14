@@ -135,8 +135,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        // $post = Post::find($id);
+
+        // save title reference to pass to show which file has been deleted
+        $title= $post->title;
+        $deleted = $post->delete();
+
+        if($deleted){ // with è file di sessione, primo valore è il nome che
+        // useremo per richiamare quella sessione ('post-deleted'→scelta da noi), mentre
+        // il secondo valore è il nome del parametro da mostrare(titolo file cancellato)
+        // CANCELLAZIONE IMG SE PRESENTE
+            // if(!empty($post->path_img)){
+            //     Storage::disk('public')->delete($post->path_img);
+            // }
+        return redirect()->route('posts.index')->with('post-deleted', $title);
+        } else {
+        return redirect()->route('home');
+        }
     }
 }
+
