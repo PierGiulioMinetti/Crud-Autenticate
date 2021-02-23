@@ -12,6 +12,17 @@
             </p>
                 <div class="info">
                     By {{$post->user->name}}
+
+                    @if (!empty($post->path_img))
+                        
+                        <img src="{{asset('storage/' . $post->path_img)}}" alt="{{$post->name}}">
+
+                    @else
+                        <p>
+                            No image available yet!
+                        </p>
+                    @endif
+
                     <div class="date">
                         {{$post->updated_at->diffForHumans()}}
                     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -49,7 +50,8 @@ class PostController extends Controller
         // VALIDATION
         $request->validate([
             'title'=>'required',
-            'body'=>'required'
+            'body'=>'required',
+            'path_img' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         // GET ACTIVE USER(FOREIGN KEY LOGGED)
@@ -57,6 +59,11 @@ class PostController extends Controller
 
         // SLUG
         $data['slug'] = Str::slug($data['title'], '-');
+
+        // SET IMAGES
+        if(!empty($data['path_img'])){
+            $data['path_img'] = Storage::disk('public')->put('images', $data['path_img']);
+        }
 
         // CREATE POST
         $newPost = new Post();
